@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Car Price Predictor</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-color: #3b82f6;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: var(--text-main);
+            text-align: center;
+            font-size: 1.75rem;
+            letter-spacing: -0.025em;
+        }
+
+        p.subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            border: 1px solid #334155;
+            background-color: #0f172a;
+            color: var(--text-main);
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 0.5rem;
+            background-color: var(--accent-color);
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            background-color: #2563eb;
+        }
+
+        .result-box {
+            margin-top: 1.75rem;
+            padding: 1rem;
+            background-color: #0f172a;
+            border-left: 4px solid var(--accent-color);
+            border-radius: 0.25rem;
+            text-align: center;
+        }
+
+        .result-text {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #4ade80;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🏎️ Car Price Valuation Engine</h2>
+    <p class="subtitle">Machine Learning Model Deployment Interface</p>
+    
+    <form action="/predict" method="POST">
+        <div class="form-group">
+            <label for="year">Model Year</label>
+            <input type="number" id="year" name="year" min="1990" max="2026" value="2015" required>
+        </div>
+
+        <div class="form-group">
+            <label for="km_driven">Kilometers Driven</label>
+            <input type="number" id="km_driven" name="km_driven" min="0" value="50000" required>
+        </div>
+
+        <div class="form-group">
+            <label for="fuel">Fuel Type</label>
+            <select id="fuel" name="fuel">
+                <option value="Petrol">Petrol</option>
+                <option value="Diesel">Diesel</option>
+                <option value="LPG">LPG</option>
+                <option value="Electric">Electric</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="transmission">Transmission</label>
+            <select id="transmission" name="transmission">
+                <option value="Manual">Manual</option>
+                <option value="Automatic">Automatic</option>
+            </select>
+        </div>
+
+        <button type="submit">Calculate Valuation</button>
+    </form>
+
+    {% if prediction_text %}
+    <div class="result-box">
+        <p class="result-text">{{ prediction_text }}</p>
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
